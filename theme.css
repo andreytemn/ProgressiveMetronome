@@ -1,0 +1,8 @@
+.lamp {
+  background: YELLOW;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
