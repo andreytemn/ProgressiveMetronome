@@ -6,3 +6,7 @@
   width: 20px;
   height: 20px;
 }
+
+.choosenLine {
+	border: 1px solid black;
+}

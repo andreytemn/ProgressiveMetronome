@@ -7,10 +7,10 @@ Progressive Metronome
 <link rel="stylesheet" type="text/css" href="theme.css"></link>
 </head>
 <body>
-  <input type="number" id="fraction1" min="1" max="16" value="4" />
-  <input type="number" id="fraction2" min="1" max="16" value="4" />
-  <input type="range" id="vol" min="1" max="100" value="50" />
-  <input type="number" id="tempo" min="1" max="120" value="120" />
+  <input type="number" id="fraction1" min="1" max="12" value="4" />
+  <input type="number" id="fraction2" min="1" max="12" value="4" />
+  <input type="range" id="vol" min="0" max="100" value="50" />
+  <input type="number" id="tempo" min="20" max="400" value="120" />
   <input type="radio" id="timbre1" name="timbre" checked/>1
   <input type="radio" id="timbre2" name="timbre" />2
   <input type="radio" id="timbre3" name="timbre" />3
@@ -24,13 +24,8 @@ Progressive Metronome
   <button id="tapTempo">
     Tap Tempo
   </button>
-  <ul id = "trackList">
-    <li>
-      <div name="track">
-        <input type="text" name="trackDescriptor" readonly/><input type="number" name="repeatNumber" min="1" max="1000" value="1" />
-      </div>
-    </li>
-  </ul>
+  <div id = "trackList">
+  </div>
   <button id="addNewTrack">
     +
   </button>
