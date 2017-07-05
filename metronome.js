@@ -11,7 +11,8 @@ function Track(fraction1, fraction2, tempo, count, line) {
 	
 	this.setLineValue = function(){
 		var thisLine = line.getElementsByTagName("trackDescriptor");
-		thisLine.value = this.fraction1 + "/" + this.fraction2 + "; " + this.tempo;
+		alert(thisLine.item(0));
+		thisLine.item(0).value = this.fraction1 + "/" + this.fraction2 + "; " + this.tempo;
 	}
 }
 
@@ -45,11 +46,6 @@ function init() {
 	};
 }
 
-function onFr1Changed()
-{
-	var fr1 = document.getElementById("fraction1").value;
-}
-
 function switchLamp() {
 	var lamp = document.getElementById("lamp1");
 	if (window.getComputedStyle(lamp, null).getPropertyValue('background-color') == 'rgb(255, 255, 0)')
@@ -62,12 +58,11 @@ function addTrack() {
 	
 	var trackList = document.getElementById("trackList");
 	var newLine = createTrackLine();
-	newLine.onclick = function (newLine)
+	newLine.onclick = function()
 	{
-		alert(newLine);
-		newLine.style.border = "1px solid black";
-		currentLine = track;
-	};
+		chooseLine(newLine, track);
+	}
+
 	trackList.appendChild(newLine);
 	
 	var fr1 = document.getElementById("fraction1").value;
@@ -78,6 +73,17 @@ function addTrack() {
 	track.setLineValue();
 	trackArray.push(track);
 	currentTrack = track;
+	chooseLine(newLine, track);
+}
+
+function chooseLine(newLine, track)
+{
+	if ("undefined" !== typeof currentLine) 
+	{
+		currentLine.line.classList.remove("choosenLine");	
+	}
+	newLine.classList.add("choosenLine");
+	currentLine = track;
 }
 
 function createTrackLine() {
