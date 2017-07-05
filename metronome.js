@@ -10,9 +10,8 @@ function Track(fraction1, fraction2, tempo, count, line) {
 	this.line = line;
 	
 	this.setLineValue = function(){
-		var thisLine = line.getElementsByTagName("trackDescriptor");
-		alert(thisLine.item(0));
-		thisLine.item(0).value = this.fraction1 + "/" + this.fraction2 + "; " + this.tempo;
+		var thisLine = line.firstChild;
+		thisLine.value = this.fraction1 + "/" + this.fraction2 + "; " + this.tempo;
 	}
 }
 
@@ -33,11 +32,11 @@ function init() {
 	addTrack();
 	document.getElementById("addNewTrack").onclick = addTrack;
 	document.getElementById("fraction1").onchange = function(){
-		currentLine.fr1 = document.getElementById("fraction1").value;
+		currentLine.fraction1 = document.getElementById("fraction1").value;
 		currentLine.setLineValue();
 	};
 	document.getElementById("fraction2").onchange = function(){
-		currentLine.fr2 = document.getElementById("fraction2").value;
+		currentLine.fraction2 = document.getElementById("fraction2").value;
 		currentLine.setLineValue();
 	};
 	document.getElementById("tempo").onchange = function(){
