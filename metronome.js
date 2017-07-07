@@ -112,7 +112,7 @@ function createTrackLine() {
 		{
 			if (trackArray[i].line == newTrack)
 			{
-				if (("undefined" !== typeof currentTrack) && (currentTrack === newTrack)) 
+				if (("undefined" !== typeof currentTrack) && (currentTrack.line === newTrack)) 
 				{
 					if (i > 0)
 					{
