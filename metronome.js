@@ -2,35 +2,10 @@ window.onload = init;
 var trackArray = [];
 var currentTrack;
 
-function Track(fraction1, fraction2, tempo, count, line) {
-	this.fraction1 = fraction1;
-	this.fraction2 = fraction2;
-	this.tempo = tempo;
-	this.count = count;
-	this.line = line;
-	
-	this.setLineValue = function(){
-		var thisLine = line.firstChild;
-		thisLine.value = this.fraction1 + "/" + this.fraction2 + "; " + this.tempo;
-	}
-}
-
-function getTrackByLine(line)
-{
-	for (var track in trackArray)
-	{
-		if (track.line == line)
-		{
-			return track;
-		}
-	}
-	return null;
-}
-
-
 function init() {
 	addTrack();
 	document.getElementById("addNewTrack").onclick = addTrack;
+	document.getElementById("play").onclick = playTracks;
 	document.getElementById("fraction1").onchange = function(){
 		currentTrack.fraction1 = document.getElementById("fraction1").value;
 		currentTrack.setLineValue();
@@ -45,12 +20,17 @@ function init() {
 	};
 }
 
-function switchLamp() {
-	var lamp = document.getElementById("lamp1");
-	if (window.getComputedStyle(lamp, null).getPropertyValue('background-color') == 'rgb(255, 255, 0)')
-		lamp.style.backgroundColor = "grey";
-	else
-		lamp.style.backgroundColor = "yellow";
+function Track(fraction1, fraction2, tempo, count, line) {
+	this.fraction1 = fraction1;
+	this.fraction2 = fraction2;
+	this.tempo = tempo;
+	this.count = count;
+	this.line = line;
+	
+	this.setLineValue = function(){
+		var thisLine = line.firstChild;
+		thisLine.value = this.fraction1 + "/" + this.fraction2 + "; " + this.tempo;
+	}
 }
 
 function addTrack() {
@@ -77,16 +57,6 @@ function addTrack() {
 	chooseLine(track);
 }
 
-function chooseLine(track)
-{
-	if ("undefined" !== typeof currentTrack) 
-	{
-		currentTrack.line.classList.remove("choosenLine");	
-	}
-	track.line.classList.add("choosenLine");
-	currentTrack = track;
-}
-
 function createTrackLine() {
 	var newTrack = document.createElement("div");
 	newTrack.setAttribute("name", "track");
@@ -107,7 +77,15 @@ function createTrackLine() {
 	removeLine.innerHTML = "-";
 	removeLine.onclick = function()
 	{
-		var trackObj = getTrackByLine(newTrack);
+		onRemoveLine(newTrack);
+	}
+	newTrack.appendChild(removeLine);
+	return newTrack;
+}
+
+function onRemoveLine(newTrack)
+{
+	var trackObj = getTrackByLine(newTrack);
 		for (var i = 0; i < trackArray.length; i++)
 		{
 			if (trackArray[i].line == newTrack)
@@ -131,8 +109,39 @@ function createTrackLine() {
 		
 		var trackList = document.getElementById("trackList");
 		trackList.removeChild(newTrack);
+}
+
+function chooseLine(track)
+{
+	if ("undefined" !== typeof currentTrack) 
+	{
+		currentTrack.line.classList.remove("choosenLine");	
 	}
-	newTrack.appendChild(removeLine);
-	return newTrack;
+	track.line.classList.add("choosenLine");
+	currentTrack = track;
+}
+
+function getTrackByLine(line)
+{
+	for (var track in trackArray)
+	{
+		if (track.line == line)
+		{
+			return track;
+		}
+	}
+	return null;
+}
+
+function switchLamp() {
+	var lamp = document.getElementById("lamp1");
+	if (window.getComputedStyle(lamp, null).getPropertyValue('background-color') == 'rgb(255, 255, 0)')
+		lamp.style.backgroundColor = "grey";
+	else
+		lamp.style.backgroundColor = "yellow";
+}
+
+function playTracks() {
+	switchLamp();
 }
 
