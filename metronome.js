@@ -6,12 +6,12 @@ function init() {
 	addTrack();
 	document.getElementById("addNewTrack").onclick = addTrack;
 	document.getElementById("play").onclick = playTracks;
-	document.getElementById("fraction1").onchange = function(){
-		currentTrack.fraction1 = document.getElementById("fraction1").value;
+	document.getElementById("fractionCount").onchange = function(){
+		currentTrack.fractionCount = document.getElementById("fractionCount").value;
 		currentTrack.setLineValue();
 	};
-	document.getElementById("fraction2").onchange = function(){
-		currentTrack.fraction2 = document.getElementById("fraction2").value;
+	document.getElementById("fractionSize").onchange = function(){
+		currentTrack.fractionSize = document.getElementById("fractionSize").value;
 		currentTrack.setLineValue();
 	};
 	document.getElementById("tempo").onchange = function(){
@@ -20,16 +20,16 @@ function init() {
 	};
 }
 
-function Track(fraction1, fraction2, tempo, count, line) {
-	this.fraction1 = fraction1;
-	this.fraction2 = fraction2;
+function Track(fractionCount, fractionSize, tempo, count, line) {
+	this.fractionCount = fractionCount;
+	this.fractionSize = fractionSize;
 	this.tempo = tempo;
 	this.count = count;
 	this.line = line;
 	
 	this.setLineValue = function(){
 		var thisLine = line.firstChild;
-		thisLine.value = this.fraction1 + "/" + this.fraction2 + "; " + this.tempo;
+		thisLine.value = this.fractionCount + "/" + this.fractionSize + "; " + this.tempo;
 	}
 }
 
@@ -47,8 +47,8 @@ function addTrack() {
 
 	trackList.appendChild(newLine);
 	
-	var fr1 = document.getElementById("fraction1").value;
-	var fr2 = document.getElementById("fraction2").value;
+	var fr1 = document.getElementById("fractionCount").value;
+	var fr2 = document.getElementById("fractionSize").value;
 	var tmp = document.getElementById("tempo").value;
 	
 	var track = new Track(fr1, fr2, tmp, 1, newLine);

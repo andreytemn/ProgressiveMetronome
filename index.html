@@ -7,8 +7,15 @@ Progressive Metronome
 <link rel="stylesheet" type="text/css" href="theme.css"></link>
 </head>
 <body>
-  <input type="number" id="fraction1" min="1" max="12" value="4" />
-  <input type="number" id="fraction2" min="1" max="12" value="4" />
+  <input type="number" id="fractionCount" min="1" max="12" value="4" />
+  <select id="fractionSize">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="4">4</option>
+    <option value="8">8</option>
+    <option value="16">16</option>
+    <option value="32">32</option>
+</select>
   <input type="range" id="vol" min="0" max="100" value="50" />
   <input type="number" id="tempo" min="20" max="400" value="120" />
   <input type="radio" id="timbre1" name="timbre" checked/>1
